@@ -5,8 +5,6 @@ import Svg, { Path } from 'react-native-svg';
 import { useNavigation } from '@react-navigation/native';
 import GoalDrawing from '../svgElements/goalDrawing';
 
-
-
 const mainButtonColors = { firstColor: '#92A3FD', secondColor: '#9DCEFF' };
 const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
 const gradientEnd = { x: 1, y: 0 };
