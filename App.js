@@ -1,20 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import IntroductionPage from './components/onboarding/introduction'; 
+import IntroGoalPage from './components/onboarding/introGoal';
+import IntroMealPage from './components/onboarding/introMeal';
+import IntroInspiredPage from './components/onboarding/introInspired';
+import HomePage from './components/home/home';
+import CalorieCalculatorPage from './components/calorie/calorieCalculator';
+import CreatingDishPage from './components/calorie/creatingDish';
+import ProductTable from './components/calorie/productTable';
 
-export default function App() {
+import 'react-native-gesture-handler';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen
+          name="IntroGoal"
+          component={IntroGoalPage}
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen
+          name="Introduction"
+          component={IntroductionPage}
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen
+          name="IntroMeal"
+          component={IntroMealPage}
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen
+          name="IntroInspired"
+          component={IntroInspiredPage}
+          options={{ headerShown: false }} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
+
+
