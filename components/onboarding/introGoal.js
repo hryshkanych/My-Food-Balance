@@ -68,11 +68,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover', 
-  },
   contentContainer: {
     height: '25%',
     width: '100%',

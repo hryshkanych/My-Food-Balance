@@ -17,34 +17,34 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-
 const App = () => {
   return (
+    <HomePage></HomePage>
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //   <Stack.Screen
+    //       name="Introduction"
+    //       component={IntroductionPage}
+    //       options={{ headerShown: false }} 
+    //     />
+    //   <Stack.Screen
+    //       name="IntroMeal"
+    //       component={IntroMealPage}
+    //       options={{ headerShown: false }} 
+    //     />
+    //   <Stack.Screen
+    //       name="IntroInspired"
+    //       component={IntroInspiredPage}
+    //       options={{ headerShown: false }} 
+    //     />
+    //   <Stack.Screen
+    //       name="IntroGoal"
+    //       component={IntroGoalPage}
+    //       options={{ headerShown: false }} 
+    //     />
 
-    <NavigationContainer>
-      <Stack.Navigator>
-      <Stack.Screen
-          name="IntroGoal"
-          component={IntroGoalPage}
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen
-          name="Introduction"
-          component={IntroductionPage}
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen
-          name="IntroMeal"
-          component={IntroMealPage}
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen
-          name="IntroInspired"
-          component={IntroInspiredPage}
-          options={{ headerShown: false }} 
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 };
 

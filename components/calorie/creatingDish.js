@@ -56,8 +56,6 @@ const CreatingDishPage = () => {
                             // onChangeText={setText}
                             // value={text}
                     />
-
-
                      <TouchableOpacity style={calorieCalculatorPageStyles.addProductButton}>
                             <LinearGradient
                             colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
@@ -68,14 +66,11 @@ const CreatingDishPage = () => {
                             </LinearGradient>
                       </TouchableOpacity>
                </View>
-
                <ProductTable/>
-
                <View style={calorieCalculatorPageStyles.textTotalContainer}>
                     <Text style={calorieCalculatorPageStyles.textTotal}>Total: </Text>
                     <Text style={calorieCalculatorPageStyles.textCalTotal}>1990 Cal </Text>
                 </View>
-
                 <TouchableOpacity style={calorieCalculatorPageStyles.saveButton}>
                     <LinearGradient
                         colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
