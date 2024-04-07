@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Ellipse, Path } from 'react-native-svg';
+import MealDrawingStyles from '../../styles/svgElements/mealDrawing';
 
 const MealDrawing = () => {
   return (
@@ -65,30 +66,5 @@ const MealDrawing = () => {
   </LinearGradient>
   );
 };
-
-const MealDrawingStyles = StyleSheet.create({
-    headerSection: {
-        width: '100%',
-        height: '55%',
-      },
-      waveDivider: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        overflow: 'hidden',
-        lineHeight: 0,
-      },
-      trainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-      },
-});
-  
 
 export default MealDrawing;
