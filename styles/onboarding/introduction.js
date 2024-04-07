@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
-
-const mainButtonColors = { firstColor: '#92A3FD', secondColor: '#9DCEFF', smallButtonColor: "#EBEEEE"};
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
+import { fontColors } from '../general';
 
 const IntroductionPageStyles = StyleSheet.create({
     container: {

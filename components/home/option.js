@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import optionStyles from '../../styles/home/option';
 
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
-
 
 const Option = ({ headerText, descriptionText, imageSource, optionColors, buttonColors }) => {
     const gradientEnd = { x: 1, y: 0 };

@@ -5,19 +5,17 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import Dish from './dish';
 import calorieCalculatorPageStyles from '../../styles/calorie/calorieCalculator';
-
-const mainButtonColors = { firstColor: '#92A3FD', secondColor: '#9DCEFF', smallButtonColor: "#EBEEEE"};
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
-const gradientEnd = { x: 1, y: 0 };
+import { generalStyles } from '../../styles/general';
+import { mainButtonColors, fontColors, gradientEnd } from '../../styles/general';
 
 
 const CalorieCalculatorPage = () => {
     const { width: screenWidth } = useWindowDimensions();
 
     return (
-      <ScrollView style={[calorieCalculatorPageStyles.container, { width: screenWidth }]}>
-        <View style={calorieCalculatorPageStyles.equalizer}> 
-          <View style={calorieCalculatorPageStyles.headerSection}>
+      <ScrollView style={[generalStyles.container, { width: screenWidth }]}>
+        <View style={generalStyles.equalizer}> 
+          <View style={generalStyles.headerSection}>
             <TouchableOpacity style={calorieCalculatorPageStyles.exitButton}>
               <Feather name="chevron-right" size={24} color={fontColors.subtext} />
             </TouchableOpacity>

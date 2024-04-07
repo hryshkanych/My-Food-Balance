@@ -3,8 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Table, Row } from 'react-native-table-component';
 import { Feather } from '@expo/vector-icons';
 import productTableStyles from '../../styles/calorie/productTable';
-
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
+import { fontColors } from '../../styles/general';
 
 const ExampleOne = () => {
   const tableHead = ['Product Name', 'Weight (gramm)', 'Calories', ''];

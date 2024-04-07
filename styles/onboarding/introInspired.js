@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
+import { fontColors } from '../general';
 
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
 
 const IntroInspiredPageStyles = StyleSheet.create({
   container: {

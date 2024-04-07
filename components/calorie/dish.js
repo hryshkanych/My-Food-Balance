@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import DishStyles from '../../styles/calorie/dish';
+import { fontColors } from '../../styles/general';
 
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
 
 const Dish = ({ name, calories, imageSource }) => {
     return (

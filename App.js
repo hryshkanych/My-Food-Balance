@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    // <HomePage></HomePage>
+
     <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen

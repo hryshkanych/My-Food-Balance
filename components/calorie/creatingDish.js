@@ -5,19 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import ProductTable from './productTable';
 import creatingDishPageStyles from '../../styles/calorie/creatingDish';
-
-const mainButtonColors = { firstColor: '#92A3FD', secondColor: '#9DCEFF', smallButtonColor: "#EBEEEE"};
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
-const inputColors = { main: '#F1F1F1', border: '#C4C4C4'};
-const gradientEnd = { x: 1, y: 0 };
+import { generalStyles } from '../../styles/general';
+import { mainButtonColors, fontColors, gradientEnd } from '../../styles/general';
 
 const CreatingDishPage = () => {
     const { width: screenWidth } = useWindowDimensions();
   
     return (
-        <ScrollView style={[creatingDishPageStyles.container, { width: screenWidth }]}>
-        <View style={creatingDishPageStyles.equalizer}> 
-          <View style={creatingDishPageStyles.headerSection}>
+        <ScrollView style={[generalStyles.container, { width: screenWidth }]}>
+        <View style={generalStyles.equalizer}> 
+          <View style={generalStyles.headerSection}>
             <TouchableOpacity style={creatingDishPageStyles.exitButton}>
                 <Feather name="chevron-right" size={24} color={fontColors.subtext} />
             </TouchableOpacity>
