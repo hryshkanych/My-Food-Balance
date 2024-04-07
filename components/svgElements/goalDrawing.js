@@ -2,14 +2,15 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Path } from 'react-native-svg';
+import GoalDrawingStyles from '../../styles/svgElements/goalDrawing';
 
 const GoalDrawing = () => {
   return (
     <LinearGradient
       colors={['#9DCEFF', '#6C82F8']}
-      style={GoalDrawingsStyles.headerSection}
+      style={GoalDrawingStyles.headerSection}
     >
-      <View style={GoalDrawingsStyles.trainer}>
+      <View style={GoalDrawingStyles.trainer}>
         <Svg
           height={'83%'}
           width={'70%'}
@@ -55,7 +56,7 @@ const GoalDrawing = () => {
                 <Path d="M126.716 54.6267C126.716 54.6267 128.882 37.9104 121.682 28.7681C121.682 28.7681 115.582 40.3127 105.582 36.3088C105.582 36.3088 91.849 48.2205 77.849 44.7504C63.849 41.2803 68.8157 8.51496 89.1157 7.11359C109.416 5.71222 150.716 13.8869 126.716 54.6267Z" fill="#3B2645"/>
         </Svg>
       </View>
-      <View style={GoalDrawingsStyles.waveDivider}>
+      <View style={GoalDrawingStyles.waveDivider}>
         <Svg
           height={50}
           width={'100%'}
@@ -72,28 +73,5 @@ const GoalDrawing = () => {
   );
 };
 
-const GoalDrawingsStyles = StyleSheet.create({
-  headerSection: {
-    width: '100%',
-    height: '55%',
-  },
-  waveDivider: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    overflow: 'hidden',
-    lineHeight: 0,
-  },
-  trainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-});
 
 export default GoalDrawing;
