@@ -1,11 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 import optionStyles from '../../styles/home/option';
+import { gradientEnd } from '../../styles/general';
 
 
 const Option = ({ headerText, descriptionText, imageSource, optionColors, buttonColors }) => {
-    const gradientEnd = { x: 1, y: 0 };
+
+    const navigation = useNavigation();
+  
+    const navigateToNextScreen = () => {
+      if (headerText === "Calorie Calculator") {
+        navigation.navigate('Calorie'); 
+      }
+    };
     
     return (
       <View style={optionStyles.option}>
@@ -20,13 +29,13 @@ const Option = ({ headerText, descriptionText, imageSource, optionColors, button
                 <Text style={optionStyles.optionHeaderText}>{headerText}</Text>
                 <Text style={optionStyles.optionDescriptionText}>{descriptionText}</Text>
               </View>
-              <TouchableOpacity style={optionStyles.optionButton}>
+              <TouchableOpacity style={optionStyles.optionButton} onPress={navigateToNextScreen}>
                 <LinearGradient
                   colors={buttonColors}
                   end={gradientEnd}
                   style={optionStyles.gradient}
                 > 
-                  <Text style={optionStyles.optionButtonText}>Let`s Start</Text>
+                  <Text style={optionStyles.optionButtonText}>Let's Start</Text>
                 </LinearGradient>
               </TouchableOpacity>
             </View>
@@ -47,4 +56,3 @@ const Option = ({ headerText, descriptionText, imageSource, optionColors, button
 
 
 export default Option;
-  

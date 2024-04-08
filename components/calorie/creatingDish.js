@@ -7,9 +7,23 @@ import ProductTable from './productTable';
 import creatingDishPageStyles from '../../styles/calorie/creatingDish';
 import { generalStyles } from '../../styles/general';
 import { mainButtonColors, fontColors, gradientEnd } from '../../styles/general';
+import { getProductByName } from '../../services/productService';
+
+
 
 const CreatingDishPage = () => {
     const { width: screenWidth } = useWindowDimensions();
+    
+    const handleAddProduct = (name) => {
+      getProductByName(name)
+      .then((data) => {
+          console.log(data);
+      })
+      .catch((error) => {
+          console.log(error);
+      });
+
+  };
   
     return (
         <ScrollView style={[generalStyles.container, { width: screenWidth }]}>
@@ -54,7 +68,7 @@ const CreatingDishPage = () => {
                             // onChangeText={setText}
                             // value={text}
                     />
-                     <TouchableOpacity style={creatingDishPageStyles.addProductButton}>
+                     <TouchableOpacity style={creatingDishPageStyles.addProductButton} onPress={() => handleAddProduct('Lettuce')}>
                             <LinearGradient
                             colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
                             end={gradientEnd}

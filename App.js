@@ -28,6 +28,11 @@ const App = () => {
           options={{ headerShown: false }} 
         />
       <Stack.Screen
+          name="IntroGoal"
+          component={IntroGoalPage}
+          options={{ headerShown: false }} 
+        />
+      <Stack.Screen
           name="IntroMeal"
           component={IntroMealPage}
           options={{ headerShown: false }} 
@@ -38,11 +43,20 @@ const App = () => {
           options={{ headerShown: false }} 
         />
       <Stack.Screen
-          name="IntroGoal"
-          component={IntroGoalPage}
+          name="CreatingDish"
+          component={CreatingDishPage}
           options={{ headerShown: false }} 
         />
-
+      <Stack.Screen
+          name="Calorie"
+          component={CalorieCalculatorPage}
+          options={{ headerShown: false }} 
+        />
+      <Stack.Screen
+          name="Home"
+          component={HomePage}
+          options={{ headerShown: false }} 
+      />
       </Stack.Navigator>
     </NavigationContainer>
   );

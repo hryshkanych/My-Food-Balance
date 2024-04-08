@@ -10,6 +10,7 @@ const IntroductionPage = () => {
   const navigation = useNavigation();
 
   const navigateToNextScreen = () => {
+
     navigation.navigate('IntroGoal'); 
   };
 

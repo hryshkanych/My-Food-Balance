@@ -1,0 +1,33 @@
+[
+    {
+        "name": "Tartare",
+        "products": [
+            {
+                "name": "Chicken",
+                "weight": 200,
+                "calories": 100
+            },
+            {
+                "name": "Tomato",
+                "weight": 130,
+                "calories": 90
+            }
+        ]
+    },
+    {
+        "name": "Risotto",
+        "products": [
+            {
+                "name": "Rice",
+                "weight": 200,
+                "calories": 260
+            },
+            {
+                "name": "Cucumber",
+                "weight": 130,
+                "calories": 90
+            }
+        ]
+    }
+        
+]
