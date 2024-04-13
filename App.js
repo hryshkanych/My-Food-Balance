@@ -7,6 +7,7 @@ import IntroInspiredPage from './components/onboarding/introInspired';
 import HomePage from './components/home/home';
 import CalorieCalculatorPage from './components/calorie/calorieCalculator';
 import CreatingDishPage from './components/calorie/creatingDish';
+import ViewingDishPage from './components/calorie/viewingDIsh';
 import ProductTable from './components/calorie/productTable';
 
 import 'react-native-gesture-handler';
@@ -40,6 +41,11 @@ const App = () => {
       <Stack.Screen
           name="IntroInspired"
           component={IntroInspiredPage}
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen
+          name="ViewingDish"
+          component={ViewingDishPage}
           options={{ headerShown: false }} 
         />
       <Stack.Screen

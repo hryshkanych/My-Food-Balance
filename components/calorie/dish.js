@@ -2,16 +2,24 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import DishStyles from '../../styles/calorie/dish';
+import { useNavigation } from '@react-navigation/native';
 import { fontColors } from '../../styles/general';
 import { deleteDishById } from '../../services/dishService'; // Імпорт сервісу для видалення страви
 import { getDishes } from '../../services/dishService';
 
+
 const Dish = ({ id, name, calories, imageSource, setDishes }) => {
+
+  const navigation = useNavigation();
+
+  const navigateToViewingDishScreen = () => {
+    navigation.navigate('ViewingDish', { dishId: id }); 
+  };
 
     const handleDeleteDish = async () => {
         try {
             await deleteDishById(id); 
-            
+
             try {
               const fetchedDishes = await getDishes();
               setDishes(fetchedDishes);
@@ -41,7 +49,7 @@ const Dish = ({ id, name, calories, imageSource, setDishes }) => {
                 </View>
             </View>
             <View style={DishStyles.rightDishPartButtons}>
-                <TouchableOpacity style={DishStyles.dishesButton}>
+                <TouchableOpacity style={DishStyles.dishesButton} onPress={navigateToViewingDishScreen}>
                     <Feather name="eye" size={26} color={fontColors.subtext} />
                 </TouchableOpacity>
                 <TouchableOpacity style={DishStyles.dishesButton} onPress={handleDeleteDish}>

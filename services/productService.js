@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/Products';
+const API_URL = 'http://192.168.3.203:3000/Products/';
 
 const getProductByName = async (name) => {
     try {
-        const response = await axios.get(`http://192.168.1.105:3000/Products/getByName?name=${name}`);
+        const response = await axios.get(`${API_URL}getByName?name=${name}`);
         console.log(response.data);
         return response.data;
     } catch (error) {
-        console.error(`Error fetching product with name :`, error);
+        console.error(`Error fetching product with name ${name}`, error);
         throw error;
     }
 }

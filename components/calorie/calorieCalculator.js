@@ -1,33 +1,48 @@
-import React, { useEffect } from 'react';
+// CalorieCalculatorPage.js
+
+import React, { useEffect, useCallback } from 'react';
 import { ScrollView, View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import Dish from './dish';
+import ModalWindow from './modalWindow';
 import calorieCalculatorPageStyles from '../../styles/calorie/calorieCalculator';
 import { generalStyles } from '../../styles/general';
 import { mainButtonColors, fontColors, gradientEnd } from '../../styles/general';
-import { getDishes } from '../../services/dishService';
+import { getDishes, deleteAllDishes } from '../../services/dishService'; 
 
 const CalorieCalculatorPage = () => {
     const { width: screenWidth } = useWindowDimensions();
     const navigation = useNavigation();
     const [dishes, setDishes] = React.useState([]);
+    const [isModalVisible, setIsModalVisible] = React.useState(false);
+
+    const fetchData = async () => {
+        try {
+            const fetchedDishes = await getDishes();
+            setDishes(fetchedDishes);
+        } catch (error) {
+            console.error('Error fetching dishes:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const fetchedDishes = await getDishes();
-                setDishes(fetchedDishes);
-            } catch (error) {
-                console.error('Error fetching dishes:', error);
-            }
-        };
         fetchData();
     }, []);
 
-    const navigateToNextScreen = () => {
+    useFocusEffect(
+        useCallback(() => {
+            fetchData();
+        }, [])
+    );
+
+    const navigateToCreatingDishScreen = () => {
         navigation.navigate('CreatingDish'); 
+    };
+
+    const handleDeleteAllDishes = () => {
+        setIsModalVisible(true);
     };
 
     return (
@@ -43,7 +58,7 @@ const CalorieCalculatorPage = () => {
                     <View style={calorieCalculatorPageStyles.dishesOprionsSection}>
                         <Text style={calorieCalculatorPageStyles.textSubHeader}>Today`s dishes</Text>
                         <View style={calorieCalculatorPageStyles.dishesButtonsSection}>
-                            <TouchableOpacity style={calorieCalculatorPageStyles.dishesButton} onPress={navigateToNextScreen}>
+                            <TouchableOpacity style={calorieCalculatorPageStyles.dishesButton} onPress={navigateToCreatingDishScreen}>
                                 <LinearGradient
                                     colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
                                     end={gradientEnd}
@@ -52,7 +67,7 @@ const CalorieCalculatorPage = () => {
                                     <Feather name="plus" size={26} color={fontColors.button} />
                                 </LinearGradient>
                             </TouchableOpacity>
-                            <TouchableOpacity style={calorieCalculatorPageStyles.dishesButton}>
+                            <TouchableOpacity style={calorieCalculatorPageStyles.dishesButton} onPress={handleDeleteAllDishes}>
                                 <LinearGradient
                                     colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
                                     end={gradientEnd}
@@ -78,15 +93,21 @@ const CalorieCalculatorPage = () => {
                     <View style={calorieCalculatorPageStyles.textTotalContainer}>
                         <Text style={calorieCalculatorPageStyles.textTotal}>Total: </Text>
                         <Text style={calorieCalculatorPageStyles.textCalTotal}>{
-                            dishes.reduce((acc, dish) => {
+                            (dishes.reduce((acc, dish) => {
                                 return acc + dish.products.reduce((total, product) => total + product.calories, 0);
-                            }, 0)
+                            }, 0)).toFixed(2)
                         } Cal</Text>
                     </View>
                 </View>
             </View>
+            <ModalWindow
+                isModalVisible={isModalVisible}
+                setIsModalVisible={setIsModalVisible}
+                fetchData={fetchData}
+            />
         </ScrollView>
     );
 };
 
 export default CalorieCalculatorPage;
+
