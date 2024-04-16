@@ -10,19 +10,19 @@ const ModalWindow = ({ isModalVisible, setIsModalVisible, fetchData }) => {
     const handleYesPress = async () => {
         try {
             await deleteAllDishes();
-            setIsModalVisible(false); // Закрити модальне вікно
-            fetchData(); // Оновити список страв
+            setIsModalVisible(false); 
+            fetchData(); 
         } catch (error) {
             console.error('Error deleting all dishes:', error);
         }
     };
 
     const handleCancelPress = () => {
-        setIsModalVisible(false); // Закрити модальне вікно
+        setIsModalVisible(false);
     };
 
     if (!isModalVisible) {
-        return null; // Якщо модальне вікно не видиме, повернути null
+        return null; 
     }
 
     return(
@@ -30,10 +30,10 @@ const ModalWindow = ({ isModalVisible, setIsModalVisible, fetchData }) => {
             <View style={modalWindowStyles.container}>
                 <Text style={modalWindowStyles.headText}>Are you sure to delete all dishes?</Text>
                 <View style={modalWindowStyles.buttonsSection}>
-                    <TouchableOpacity style={modalWindowStyles.button} onPress={handleYesPress}>
+                    <TouchableOpacity style={modalWindowStyles.buttonConfirm} onPress={handleYesPress}>
                         <Text>Yes</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={modalWindowStyles.button} onPress={handleCancelPress}>
+                    <TouchableOpacity style={modalWindowStyles.buttonCancle} onPress={handleCancelPress}>
                         <Text>Cancel</Text>
                     </TouchableOpacity>
                 </View>

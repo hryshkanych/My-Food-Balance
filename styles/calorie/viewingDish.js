@@ -57,10 +57,11 @@ const viewingDishPageStyles = StyleSheet.create({
         height: 55,
         width: '79%',
         paddingHorizontal: 15,
-        backgroundColor: 'transparent',
+        backgroundColor: inputColors.main,
         borderRadius: 50,
-        fontSize: 18,
-  
+        fontSize: 16,
+        borderWidth: 1,
+        borderColor: inputColors.border,
       },
       gradient: {
         flex: 1,
@@ -71,7 +72,6 @@ const viewingDishPageStyles = StyleSheet.create({
       textTotalContainer: {
         height: 50,
         width: '100%',
-        // backgroundColor: 'red',
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',

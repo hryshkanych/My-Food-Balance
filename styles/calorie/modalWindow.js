@@ -49,7 +49,7 @@ const modalWindowStyles = StyleSheet.create({
     gap: 15,
   },
 
-  button: {
+  buttonConfirm: {
     width: 100,
     height: 45,
     justifyContent: 'center',
@@ -57,9 +57,23 @@ const modalWindowStyles = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: mainButtonColors.smallButtonColor,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: fontColors.placeholder,
+    borderWidth: 1.25,
+    borderColor: 'green', 
   },
+
+  buttonCancle: {
+    width: 100,
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    backgroundColor: mainButtonColors.smallButtonColor,
+    overflow: 'hidden',
+    borderWidth: 1.25,
+    borderColor: fontColors.placeholder,
+    borderColor: '#A80A4A',
+  },
+
 
 });
 

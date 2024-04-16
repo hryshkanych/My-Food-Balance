@@ -13,6 +13,8 @@ const Option = ({ headerText, descriptionText, imageSource, optionColors, button
     const navigateToNextScreen = () => {
       if (headerText === "Calorie Calculator") {
         navigation.navigate('Calorie'); 
+      } else if (headerText == "Optimal daily rate") {
+        navigation.navigate('DailyRate');
       }
     };
     
