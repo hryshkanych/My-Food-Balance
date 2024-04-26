@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import DishStyles from '../../styles/calorie/dish';
 import { useNavigation } from '@react-navigation/native';
 import { fontColors } from '../../styles/general';
-import { deleteDishById } from '../../services/dishService'; // Імпорт сервісу для видалення страви
+import { deleteDishById } from '../../services/dishService'; 
 import { getDishes } from '../../services/dishService';
 
 

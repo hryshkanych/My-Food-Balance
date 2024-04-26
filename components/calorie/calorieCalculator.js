@@ -1,10 +1,9 @@
-// CalorieCalculatorPage.js
-
 import React, { useEffect, useCallback } from 'react';
 import { ScrollView, View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+import FlashMessage, { showMessage } from 'react-native-flash-message';
 import Dish from './dish';
 import ModalWindow from './modalWindow';
 import calorieCalculatorPageStyles from '../../styles/calorie/calorieCalculator';
@@ -45,12 +44,16 @@ const CalorieCalculatorPage = () => {
         setIsModalVisible(true);
     };
 
+    const goBack = () => {
+        navigation.goBack();
+    };
+
     return (
         <ScrollView style={[generalStyles.container, { width: screenWidth }]}>
             <View style={generalStyles.equalizer}> 
                 <View style={generalStyles.headerSection}>
-                    <TouchableOpacity style={calorieCalculatorPageStyles.exitButton}>
-                        <Feather name="chevron-right" size={24} color={fontColors.subtext} />
+                    <TouchableOpacity style={calorieCalculatorPageStyles.exitButton} onPress={goBack}>
+                        <Feather name="chevron-left" size={24} color={fontColors.subtext} />
                     </TouchableOpacity>
                     <Text style={calorieCalculatorPageStyles.textHeader}>Calorie Calculator</Text>
                 </View>
@@ -105,9 +108,9 @@ const CalorieCalculatorPage = () => {
                 setIsModalVisible={setIsModalVisible}
                 fetchData={fetchData}
             />
+            
         </ScrollView>
     );
 };
 
 export default CalorieCalculatorPage;
-

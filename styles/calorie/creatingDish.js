@@ -6,7 +6,6 @@ const creatingDishPageStyles = StyleSheet.create({
       width: '100%',
       flex: 1,
       paddingTop: 30,
-    //   backgroundColor: 'pink'
     },
     textHeader: {
         marginTop: 20,
@@ -25,7 +24,6 @@ const creatingDishPageStyles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: mainButtonColors.smallButtonColor,
         overflow: 'hidden',
-        transform: [{ rotateY: '180deg' }],
       },
 
       dishNameSection: {
@@ -34,7 +32,6 @@ const creatingDishPageStyles = StyleSheet.create({
         height: 80,
         justifyContent: 'space-between',
         alignItems: 'center',
-        // backgroundColor: 'pink'
       },
       imageSection: {
         width: '17%',
@@ -66,7 +63,6 @@ const creatingDishPageStyles = StyleSheet.create({
       ingredientsTextSection: {
         marginVertical: 10,
         width: '100%',
-        // backgroundColor: 'green',
         justifyContent: 'center',
         alignItems: 'flex-start'
 
@@ -81,7 +77,6 @@ const creatingDishPageStyles = StyleSheet.create({
         height: 80,
         justifyContent: 'space-between',
         alignItems: 'center',
-        // backgroundColor: 'pink'
       },
       inputProductName: {
         height: 55,
@@ -136,7 +131,6 @@ const creatingDishPageStyles = StyleSheet.create({
       textTotalContainer: {
         height: 50,
         width: '100%',
-        // backgroundColor: 'red',
         justifyContent: 'flex-end',
         alignItems: 'center',
         flexDirection: 'row',

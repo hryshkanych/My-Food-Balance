@@ -3,7 +3,7 @@ import { ScrollView, View, Text, TouchableOpacity, Image, TextInput, useWindowDi
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
-import FlashMessage, { showMessage } from 'react-native-flash-message'; // Імпорт бібліотеки для виведення повідомлень
+import FlashMessage, { showMessage } from 'react-native-flash-message';
 import ProductTable from './productTable';
 import creatingDishPageStyles from '../../styles/calorie/creatingDish';
 import { generalStyles } from '../../styles/general';
@@ -22,86 +22,89 @@ const CreatingDishPage = () => {
     const [productTableData, setProductTableData] = useState([]);
 
     const showMessageAlert = (message, description, type) => {
-      showMessage({
-          message,
-          description,
-          type,
-          duration: 3000,
-          position: "top",
-      });
-  };
+        showMessage({
+            message,
+            description,
+            type,
+            duration: 3000,
+            position: "top",
+        });
+    };
   
-  const handleAddProduct = async () => {
-      if (!productName.trim() && !gramm.trim()) {
-          showMessageAlert('Warning', 'Product and grams fields cannot be empty', 'warning');
-          return;
-      } else if (!productName.trim()) {
-          showMessageAlert('Warning', 'Product field cannot be empty', 'warning');
-          return;
-      } else if (!gramm.trim()) {
-          showMessageAlert('Warning', 'Grams field cannot be empty', 'warning');
-          return;
-      } 
+    const handleAddProduct = async () => {
+        if (!productName.trim() && !gramm.trim()) {
+            showMessageAlert('Warning', 'Product and grams fields cannot be empty', 'warning');
+            return;
+        } else if (!productName.trim()) {
+            showMessageAlert('Warning', 'Product field cannot be empty', 'warning');
+            return;
+        } else if (!gramm.trim()) {
+            showMessageAlert('Warning', 'Grams field cannot be empty', 'warning');
+            return;
+        } 
     
-      try {
-          formattedProductName = productName.charAt(0).toUpperCase() + productName.slice(1);
-          const product = await getProductByName(formattedProductName);
-          if (!/^\d+$/.test(gramm)) {
-              showMessageAlert('Error', 'Gramm field should contain only digits', 'danger');
-              return; 
-          }
-          const caloriesPerGram = product.calories / 1000;
-          const calculatedCalories = (caloriesPerGram * parseInt(gramm)).toFixed(2);
-          const newProductData = [product.name, gramm, calculatedCalories];
-          setProductTableData(prevData => [...prevData, newProductData]);
-          setTotalCalories(prevTotalCalories => prevTotalCalories + parseFloat(calculatedCalories));
+        try {
+            formattedProductName = productName.charAt(0).toUpperCase() + productName.slice(1);
+            const product = await getProductByName(formattedProductName);
+            if (!/^\d+$/.test(gramm)) {
+                showMessageAlert('Error', 'Gramm field should contain only digits', 'danger');
+                return; 
+            }
+            const caloriesPerGram = product.calories / 1000;
+            const calculatedCalories = (caloriesPerGram * parseInt(gramm)).toFixed(2);
+            const newProductData = [product.name, gramm, calculatedCalories];
+            setProductTableData(prevData => [...prevData, newProductData]);
+            setTotalCalories(prevTotalCalories => prevTotalCalories + parseFloat(calculatedCalories));
+            setProductName('');
+            setGramm('');
+        } catch (error) {
+            // console.error('Error fetching the product', error);
+            showMessageAlert('Error', 'No such product exists or the name is entered incorrectly', 'danger');
+        }
+    };
+  
+    const handleSaveToDishes = async () => {
+        if (!dishName.trim()) {
+            showMessageAlert('Warning', 'Dish name cannot be empty', 'warning');
+            return;
+        }
+  
+        if (productTableData.length === 0) {
+            showMessageAlert('Warning', 'Please add at least one product to the dish', 'warning');
+            return;
+        }
+  
+        try {
+            formattedDishName = dishName.charAt(0).toUpperCase() + dishName.slice(1);
+            const newDishData = {
+                name: dishName,
+                products: productTableData.map(product => ({
+                    name: product[0],
+                    weight: product[1],
+                    calories: product[2]
+                }))
+            };
+            await addDish(newDishData);
+            setDishName('');
+            setProductName('');
+            setGramm('');
+            setProductTableData([]);
+            navigation.goBack();
+        } catch (error) {
+            console.error('Error saving the dish', error);
+        }
+    };
 
-  
-      } catch (error) {
-          console.error('Error fetching the product', error);
-          showMessageAlert('Error', 'No such product exists or the name is entered incorrectly', 'danger');
-      }
-  };
-  
-  const handleSaveToDishes = async () => {
-      if (!dishName.trim()) {
-          showMessageAlert('Warning', 'Dish name cannot be empty', 'warning');
-          return;
-      }
-  
-      if (productTableData.length === 0) {
-          showMessageAlert('Warning', 'Please add at least one product to the dish', 'warning');
-          return;
-      }
-  
-      try {
-        formattedDishName = dishName.charAt(0).toUpperCase() + dishName.slice(1);
-
-          const newDishData = {
-              name: dishName,
-              products: productTableData.map(product => ({
-                  name: product[0],
-                  weight: product[1],
-                  calories: product[2]
-              }))
-          };
-          await addDish(newDishData);
-          setDishName('');
-          setProductName('');
-          setGramm('');
-          setProductTableData([]);
-          navigation.goBack();
-      } catch (error) {
-          console.error('Error saving the dish', error);
-      }
-  };
+    const goBack = () => {
+        navigation.goBack();
+    };
 
     return (
         <ScrollView style={[generalStyles.container, { width: screenWidth }]}>
             <View style={generalStyles.equalizer}> 
                 <View style={generalStyles.headerSection}>
-                    <TouchableOpacity style={creatingDishPageStyles.exitButton}>
-                        <Feather name="chevron-right" size={24} color={fontColors.subtext} />
+                    <TouchableOpacity style={creatingDishPageStyles.exitButton} onPress={goBack}>
+                        <Feather name="chevron-left" size={24} color={fontColors.subtext} />
                     </TouchableOpacity>
                     <Text style={creatingDishPageStyles.textHeader}>Creating the dish</Text>
                 </View>

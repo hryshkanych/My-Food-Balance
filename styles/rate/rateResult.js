@@ -15,7 +15,7 @@ const rateResultPageStyles = StyleSheet.create({
       gap: '20%',
     },
     textDescription: {
-      marginTop: 20,
+      marginTop: '32%',
       marginBottom: 10,
       fontSize: 14,
       textAlign: 'center',
@@ -32,13 +32,13 @@ const rateResultPageStyles = StyleSheet.create({
         width: 45,
         height: 45,
         position: 'absolute',
+        opacity: 0.3,
         left: 0,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 15,
         backgroundColor: mainButtonColors.smallButtonColor,
         overflow: 'hidden',
-        transform: [{ rotateY: '180deg' }],
       },
       animationContainer:{
         height: 390,
@@ -61,7 +61,31 @@ const rateResultPageStyles = StyleSheet.create({
         color: '#8A94EE',
         fontWeight: '500',
         marginBottom: 15,
-      }
+      },
+       
+      back: {
+        width: '100%',
+        height: '62%',
+        backgroundColor: 'pink',
+        position: 'absolute',
+        top: 0,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.35,
+        shadowRadius: 10,
+        elevation: 10, 
+      },
+
+      gradient: {
+        flex: 1,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      
 });
 
 export default rateResultPageStyles;

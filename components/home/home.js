@@ -38,7 +38,7 @@ const HomePage = () => {
                 buttonColors={caloryButtonColors}
               />
               <Option
-                headerText="Optimal daily rate"
+                headerText="Optimal Daily Rate"
                 descriptionText="See how many calories per day it is recommended to eat"
                 imageSource={require('../../assets/images/yoga.png')}
                 optionColors={rateOptionColors}

@@ -3,6 +3,7 @@ import { ScrollView, View, Text, TouchableOpacity, TextInput, StyleSheet, useWin
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+import FlashMessage, { showMessage } from 'react-native-flash-message';
 import { generalStyles } from '../../styles/general';
 import {dailyRatePageStyles, boxStyles} from '../../styles/rate/dailyRate';
 import { fontColors, inputColors, mainButtonColors, gradientEnd } from '../../styles/general';
@@ -15,8 +16,21 @@ const DailyRatePage = () => {
 
     const navigateToResultRateScreen = ( dailyCalories ) => {
         navigation.navigate('RateResult', { dailyCalories: dailyCalories }); 
-      };
+    };
     
+    const showMessageAlert = (message, description, type) => {
+        showMessage({
+            message,
+            description,
+            type,
+            duration: 3000,
+            position: "top",
+        });
+    };
+    
+    const goBack = () => {
+        navigation.goBack();
+    };
 
     const [birthdate, setBirthdate] = useState('');
     const [weight, setWeight] = useState('');
@@ -43,7 +57,11 @@ const DailyRatePage = () => {
     ];
 
     const calculateCalories = () => {
-
+        if (!birthdate || !weight || !height || !selectedGender || !selectedGoal || !selectedActivityLevel) {
+            showMessageAlert('Warning', 'All fields are required', 'warning');
+            return;
+        }
+        
         const age = parseInt(birthdate);
         const weightKg = parseFloat(weight);
         const heightM = parseFloat(height) / 100;
@@ -76,8 +94,6 @@ const DailyRatePage = () => {
     
         const dailyCalories = bmr * activityFactor * goalFactor;
 
-        console.log("Кількість калорій, яку потрібно споживати вдень:", dailyCalories);
-
         navigateToResultRateScreen(dailyCalories);
     }
 
@@ -85,8 +101,8 @@ const DailyRatePage = () => {
         <ScrollView style={[generalStyles.container, { width: screenWidth }]}>
             <View style={generalStyles.equalizer}> 
                 <View style={generalStyles.headerSection}>
-                    <TouchableOpacity style={dailyRatePageStyles.exitButton}>
-                        <Feather name="chevron-right" size={24} color={fontColors.subtext} />
+                    <TouchableOpacity style={dailyRatePageStyles.exitButton} onPress={goBack}>
+                        <Feather name="chevron-left" size={24} color={fontColors.subtext} />
                     </TouchableOpacity>
                     <Text style={dailyRatePageStyles.textHeader}>Optimal daily rate</Text>
                 </View>
@@ -178,6 +194,7 @@ const DailyRatePage = () => {
                     </View>
                 </View>
             </View>
+            <FlashMessage position="bottom" />
         </ScrollView>
     );
 };

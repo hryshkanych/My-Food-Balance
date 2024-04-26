@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://192.168.0.102:3000/Products/';
+const API_URL = 'http://172.20.10.2:3000/Products/';
 
 const getProductByName = async (name) => {
     try {

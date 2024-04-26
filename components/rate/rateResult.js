@@ -17,19 +17,30 @@ const RateResultPage = () => {
     const route = useRoute();
     const { dailyCalories } = route.params;
 
+    const goBack = () => {
+        navigation.goBack();
+    };
 
     return (
         <View style={[generalStyles.container, { width: screenWidth }]}>
+            <View style={rateResultPageStyles.back}>
+                <LinearGradient
+                    colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
+                    end={gradientEnd}
+                    style={rateResultPageStyles.gradient}
+                >
+                </LinearGradient>
+            </View>
             <View style={generalStyles.equalizer}> 
                 <View style={generalStyles.headerSection}>
-                    <TouchableOpacity style={rateResultPageStyles.exitButton}>
-                        <Feather name="chevron-right" size={24} color={fontColors.subtext} />
+                    <TouchableOpacity style={rateResultPageStyles.exitButton} onPress={goBack}>
+                        <Feather name="chevron-left" size={24} color={fontColors.subtext} />
                     </TouchableOpacity>
                     <Text style={rateResultPageStyles.textHeader}>Optimal daily rate</Text>
                 </View>
                 <View style={rateResultPageStyles.contentContainer}>
                     <View style={rateResultPageStyles.animationContainer}>
-                        <LottieView style={{flex: 1, opacity: 0.95}} autoPlay source={require('../../assets/person.json')}></LottieView>
+                        <LottieView style={{flex: 1, opacity: 0.92}} autoPlay source={require('../../assets/workPerson.json')}></LottieView>
                     </View >
                     <Text style={rateResultPageStyles.textDescription}>     The calorie calculator calculated this result using Harris-Benedict formula. 
                                         This result is only theoretical. To obtain a more accurate result, we recommend consulting 
@@ -37,6 +48,7 @@ const RateResultPage = () => {
                     <Text style={rateResultPageStyles.textRes}>Your optimal daily rate is: </Text>
                     <Text style={rateResultPageStyles.textCal}>{dailyCalories.toFixed(2).toString()} Cal</Text>
                       
+
                 </View>
             </View>
         </View>
@@ -45,4 +57,3 @@ const RateResultPage = () => {
 
 
 export default RateResultPage;
-

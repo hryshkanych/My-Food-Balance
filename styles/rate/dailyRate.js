@@ -38,7 +38,6 @@ const dailyRatePageStyles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: mainButtonColors.smallButtonColor,
         overflow: 'hidden',
-        transform: [{ rotateY: '180deg' }],
       },
 
       inputField: {

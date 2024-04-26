@@ -26,7 +26,6 @@ const calorieCalculatorPageStyles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: mainButtonColors.smallButtonColor,
         overflow: 'hidden',
-        transform: [{ rotateY: '180deg' }],
       },
       dishesOprionsSection: {
         width: '100%',
