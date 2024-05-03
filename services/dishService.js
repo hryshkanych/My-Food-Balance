@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://172.20.10.2:3000/Dishes/';
+const baseURL = 'http://192.168.1.106:3000/Dishes/';
 
 const getDishes = async () => {
     try {
