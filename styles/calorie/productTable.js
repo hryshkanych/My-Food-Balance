@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
-
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
+import { fontColors } from '../general';
 
 const productTableStyles = StyleSheet.create({
     container: {

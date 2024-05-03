@@ -1,29 +1,7 @@
 import { StyleSheet } from 'react-native';
-
-const mainButtonColors = { firstColor: '#92A3FD', secondColor: '#9DCEFF', smallButtonColor: "#EBEEEE"};
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
-
+import { mainButtonColors, fontColors } from '../general';
 
 const calorieCalculatorPageStyles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'white',
-    },
-    equalizer: {
-      paddingHorizontal: 32,
-      width: '100%',
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    headerSection: {
-      width: '100%',
-      height: 100,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'flex-end',
-      paddingBottom: 5,
-    },
     contentContainer: {
       width: '100%',
       flex: 1,
@@ -48,7 +26,6 @@ const calorieCalculatorPageStyles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: mainButtonColors.smallButtonColor,
         overflow: 'hidden',
-        transform: [{ rotateY: '180deg' }],
       },
       dishesOprionsSection: {
         width: '100%',
@@ -88,7 +65,6 @@ const calorieCalculatorPageStyles = StyleSheet.create({
       },
       listDishesSection: {
         // backgroundColor: 'grey',
-        height: '100%',
         width: '100%',
         paddingTop: 20,
       },

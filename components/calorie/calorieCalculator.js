@@ -1,71 +1,116 @@
-import React from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
+import React, { useEffect, useCallback } from 'react';
+import { ScrollView, View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+import FlashMessage, { showMessage } from 'react-native-flash-message';
 import Dish from './dish';
+import ModalWindow from './modalWindow';
 import calorieCalculatorPageStyles from '../../styles/calorie/calorieCalculator';
-
-const mainButtonColors = { firstColor: '#92A3FD', secondColor: '#9DCEFF', smallButtonColor: "#EBEEEE"};
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
-const gradientEnd = { x: 1, y: 0 };
-
+import { generalStyles } from '../../styles/general';
+import { mainButtonColors, fontColors, gradientEnd } from '../../styles/general';
+import { getDishes, deleteAllDishes } from '../../services/dishService'; 
 
 const CalorieCalculatorPage = () => {
     const { width: screenWidth } = useWindowDimensions();
+    const navigation = useNavigation();
+    const [dishes, setDishes] = React.useState([]);
+    const [isModalVisible, setIsModalVisible] = React.useState(false);
+
+    const fetchData = async () => {
+        try {
+            const fetchedDishes = await getDishes();
+            setDishes(fetchedDishes);
+        } catch (error) {
+            console.error('Error fetching dishes:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    useFocusEffect(
+        useCallback(() => {
+            fetchData();
+        }, [])
+    );
+
+    const navigateToCreatingDishScreen = () => {
+        navigation.navigate('CreatingDish'); 
+    };
+
+    const handleDeleteAllDishes = () => {
+        setIsModalVisible(true);
+    };
+
+    const goBack = () => {
+        navigation.goBack();
+    };
 
     return (
-      <ScrollView style={[calorieCalculatorPageStyles.container, { width: screenWidth }]}>
-        <View style={calorieCalculatorPageStyles.equalizer}> 
-          <View style={calorieCalculatorPageStyles.headerSection}>
-            <TouchableOpacity style={calorieCalculatorPageStyles.exitButton}>
-              <Feather name="chevron-right" size={24} color={fontColors.subtext} />
-            </TouchableOpacity>
-            <Text style={calorieCalculatorPageStyles.textHeader}>Calorie Calculator</Text>
-          </View>
-          <View style={calorieCalculatorPageStyles.contentContainer}>
-            <View style={calorieCalculatorPageStyles.dishesOprionsSection}>
-                <Text style={calorieCalculatorPageStyles.textSubHeader}>Today`s dishes</Text>
-                <View style={calorieCalculatorPageStyles.dishesButtonsSection}>
-                    <TouchableOpacity style={calorieCalculatorPageStyles.dishesButton}>
-                        <LinearGradient
-                            colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
-                            end={gradientEnd}
-                            style={calorieCalculatorPageStyles.gradient}
-                        >
-                            <Feather name="plus" size={26} color={fontColors.button} />
-                        </LinearGradient>
+        <ScrollView style={[generalStyles.container, { width: screenWidth }]}>
+            <View style={generalStyles.equalizer}> 
+                <View style={generalStyles.headerSection}>
+                    <TouchableOpacity style={calorieCalculatorPageStyles.exitButton} onPress={goBack}>
+                        <Feather name="chevron-left" size={24} color={fontColors.subtext} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={calorieCalculatorPageStyles.dishesButton}>
-                        <LinearGradient
-                            colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
-                            end={gradientEnd}
-                            style={calorieCalculatorPageStyles.gradient}
-                        >
-                             <Feather name="x" size={26} color={fontColors.button} />
-                        </LinearGradient>
-                    </TouchableOpacity>
+                    <Text style={calorieCalculatorPageStyles.textHeader}>Calorie Calculator</Text>
+                </View>
+                <View style={calorieCalculatorPageStyles.contentContainer}>
+                    <View style={calorieCalculatorPageStyles.dishesOprionsSection}>
+                        <Text style={calorieCalculatorPageStyles.textSubHeader}>Today`s dishes</Text>
+                        <View style={calorieCalculatorPageStyles.dishesButtonsSection}>
+                            <TouchableOpacity style={calorieCalculatorPageStyles.dishesButton} onPress={navigateToCreatingDishScreen}>
+                                <LinearGradient
+                                    colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
+                                    end={gradientEnd}
+                                    style={calorieCalculatorPageStyles.gradient}
+                                >
+                                    <Feather name="plus" size={26} color={fontColors.button} />
+                                </LinearGradient>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={calorieCalculatorPageStyles.dishesButton} onPress={handleDeleteAllDishes}>
+                                <LinearGradient
+                                    colors={[mainButtonColors.firstColor, mainButtonColors.secondColor]}
+                                    end={gradientEnd}
+                                    style={calorieCalculatorPageStyles.gradient}
+                                >
+                                    <Feather name="x" size={26} color={fontColors.button} />
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={calorieCalculatorPageStyles.listDishesSection}>
+                        {dishes.map((dish, index) => (
+                            <Dish 
+                                key={index}
+                                id = {dish._id}
+                                name={dish.name}
+                                calories={dish.products.reduce((acc, product) => acc + product.calories, 0)}
+                                imageSource={require('../../assets/images/food-tray.png')}
+                                setDishes={setDishes} // Передача функції для оновлення страв
+                            />
+                        ))}
+                    </View>
+                    <View style={calorieCalculatorPageStyles.textTotalContainer}>
+                        <Text style={calorieCalculatorPageStyles.textTotal}>Total: </Text>
+                        <Text style={calorieCalculatorPageStyles.textCalTotal}>{
+                            (dishes.reduce((acc, dish) => {
+                                return acc + dish.products.reduce((total, product) => total + product.calories, 0);
+                            }, 0)).toFixed(2)
+                        } Cal</Text>
+                    </View>
                 </View>
             </View>
-            <View style={calorieCalculatorPageStyles.listDishesSection}>
-                <Dish name="Pasta with eggs" calories="720" imageSource={require('../../assets/images/food-tray.png')} />
-                <Dish name="Pasta with eggs" calories="720" imageSource={require('../../assets/images/food-tray.png')} />
-                <Dish name="Pasta with eggs" calories="720" imageSource={require('../../assets/images/food-tray.png')} />
-                <Dish name="Pasta with eggs" calories="720" imageSource={require('../../assets/images/food-tray.png')} />
-                <Dish name="Pasta with eggs" calories="720" imageSource={require('../../assets/images/food-tray.png')} />
-                <Dish name="Pasta with eggs" calories="720" imageSource={require('../../assets/images/food-tray.png')} />
-                <Dish name="Pasta with eggs" calories="720" imageSource={require('../../assets/images/food-tray.png')} />
-                <Dish name="Pasta with eggs" calories="720" imageSource={require('../../assets/images/food-tray.png')} />
-                <View style={calorieCalculatorPageStyles.textTotalContainer}>
-                    <Text style={calorieCalculatorPageStyles.textTotal}>Total: </Text>
-                    <Text style={calorieCalculatorPageStyles.textCalTotal}>1990 Cal </Text>
-                </View>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
+            <ModalWindow
+                isModalVisible={isModalVisible}
+                setIsModalVisible={setIsModalVisible}
+                fetchData={fetchData}
+            />
+            
+        </ScrollView>
     );
-  };
-
+};
 
 export default CalorieCalculatorPage;

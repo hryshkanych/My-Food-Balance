@@ -4,10 +4,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Feather } from '@expo/vector-icons';
 import Option from './option';
 import homePageStyles from '../../styles/home/home';
-
-const mainButtonColors = { firstColor: '#92A3FD', secondColor: '#9DCEFF', smallButtonColor: "#EBEEEE"};
-const fontColors = { title: '#38232D', subtext: '#7B6F72', placeholder: '#ADA4A5', button: 'white' };
-const gradientEnd = { x: 1, y: 0 };
+import { generalStyles } from '../../styles/general';
+import { fontColors } from '../../styles/general';
 
 
 const HomePage = () => {
@@ -21,9 +19,9 @@ const HomePage = () => {
   const recipeButtonColors = ['#759093', '#88A3A7', '#9DBEC3'];
 
   return (
-    <View style={homePageStyles.container}>
-      <View style={homePageStyles.equalizer}> 
-        <View style={homePageStyles.headerSection}>
+    <View style={generalStyles.container}>
+      <View style={generalStyles.equalizer}> 
+        <View style={generalStyles.headerSection}>
           <TouchableOpacity style={homePageStyles.exitButton}>
             <Feather name="log-out" size={24} color={fontColors.subtext} />
           </TouchableOpacity>
@@ -40,7 +38,7 @@ const HomePage = () => {
                 buttonColors={caloryButtonColors}
               />
               <Option
-                headerText="Optimal daily rate"
+                headerText="Optimal Daily Rate"
                 descriptionText="See how many calories per day it is recommended to eat"
                 imageSource={require('../../assets/images/yoga.png')}
                 optionColors={rateOptionColors}
